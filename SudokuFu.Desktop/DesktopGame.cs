@@ -36,7 +36,7 @@ namespace SudokuFu.Desktop
             // _InputService = _Mediator.RegisterService<IInputService, GamePadInputService>(new GamePadInputService(_UpdateService));
             // TODO Do platform specific mediator registration here...
 
-            _Logger.AddLogger(new DesktopTextLogger()).Start();
+            //_Logger.AddLogger(new DesktopTextLogger()).Start();
         }
 
         /// <summary>

@@ -1,6 +1,8 @@
 using System.Reflection;
 using Microsoft.Xna.Framework;
+using MonogameTemplate.Core.Input;
 using MonogameTemplate.Core.Logic;
+using MonogameTemplate.Interfaces.Input;
 
 namespace SudokuFu.Android
 {
@@ -33,6 +35,11 @@ namespace SudokuFu.Android
         {
             base.LoadContent();
             // TODO: use this.Content to load your game content here
+
+            if (_InputService == null)
+            {
+                _InputService = _Mediator.RegisterService<IInputService, TouchInputService>(new TouchInputService(_EventService, _UpdateService));
+            }
         }
     }
 }
