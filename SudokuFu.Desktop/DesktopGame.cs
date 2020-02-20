@@ -1,39 +1,28 @@
+﻿using System.Reflection;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonogameTemplate.Core.Debugging.Loggers;
+using MonogameTemplate.Core.Logic;
 
-namespace SudokuFu.Android
+namespace SudokuFu.Desktop
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class DesktopGame : GameCore
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
-        public Game1()
+        public DesktopGame()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-
-            graphics.IsFullScreen = true;
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 480;
-            graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
+            _GraphicsDeviceManager.PreferredBackBufferWidth = 1280;
+            _GraphicsDeviceManager.PreferredBackBufferHeight = 720;
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
-        protected override void Initialize()
+        protected override Assembly[] GetActiveAssemblies()
         {
-            // TODO: Add your initialization logic here
-
-            base.Initialize();
+            return new Assembly[]
+            {
+                Assembly.GetAssembly(typeof(GameCore)),
+            };
         }
 
         /// <summary>
@@ -42,10 +31,12 @@ namespace SudokuFu.Android
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            base.LoadContent();
 
-            // TODO: use this.Content to load your game content here
+            // _InputService = _Mediator.RegisterService<IInputService, GamePadInputService>(new GamePadInputService(_UpdateService));
+            // TODO Do platform specific mediator registration here...
+
+            _Logger.AddLogger(new DesktopTextLogger()).Start();
         }
 
         /// <summary>
@@ -64,7 +55,7 @@ namespace SudokuFu.Android
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
