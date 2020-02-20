@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuFu.Desktop", "SudokuFu.Desktop\SudokuFu.Desktop.csproj", "{53F18C47-E76F-4A67-B807-BCE206EE1FE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuFu.Android", "SudokuFu.Android\SudokuFu.Android.csproj", "{42C968C8-217D-4AF5-A61A-984A10F226AD}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SudokuFu.Shared", "SudokuFu.Shared\SudokuFu.Shared.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{DB724524-E090-4D25-A0C7-5D86B7A42B27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{EE06387A-13ED-4F32-9B4D-5FBAC5A7EC6A}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SudokuFu.Shared\SudokuFu.Shared.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53F18C47-E76F-4A67-B807-BCE206EE1FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F18C47-E76F-4A67-B807-BCE206EE1FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F18C47-E76F-4A67-B807-BCE206EE1FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F18C47-E76F-4A67-B807-BCE206EE1FE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42C968C8-217D-4AF5-A61A-984A10F226AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42C968C8-217D-4AF5-A61A-984A10F226AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42C968C8-217D-4AF5-A61A-984A10F226AD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{42C968C8-217D-4AF5-A61A-984A10F226AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42C968C8-217D-4AF5-A61A-984A10F226AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42C968C8-217D-4AF5-A61A-984A10F226AD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{53F18C47-E76F-4A67-B807-BCE206EE1FE6} = {DB724524-E090-4D25-A0C7-5D86B7A42B27}
+		{42C968C8-217D-4AF5-A61A-984A10F226AD} = {DB724524-E090-4D25-A0C7-5D86B7A42B27}
+		{A0CDBD0E-3A41-42B7-9425-A838BC2C7383} = {DB724524-E090-4D25-A0C7-5D86B7A42B27}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3F74B27-D354-45E8-828F-841D5056FF88}
+	EndGlobalSection
+EndGlobal
