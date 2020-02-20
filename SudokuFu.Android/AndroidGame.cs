@@ -33,13 +33,15 @@ namespace SudokuFu.Android
         /// </summary>
         protected override void LoadContent()
         {
-            base.LoadContent();
-            // TODO: use this.Content to load your game content here
 
             if (_InputService == null)
             {
                 _InputService = _Mediator.RegisterService<IInputService, TouchInputService>(new TouchInputService(_EventService, _UpdateService));
             }
+
+            base.LoadContent();
+
+            // TODO Start core game instance
         }
     }
 }

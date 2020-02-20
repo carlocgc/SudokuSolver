@@ -31,21 +31,13 @@ namespace SudokuFu.Desktop
         /// </summary>
         protected override void LoadContent()
         {
+            // TODO _InputService = _Mediator.RegisterService<IInputService, GamePadInputService>(new GamePadInputService(_UpdateService));
+
+            _Logger.AddLogger(new DesktopTextLogger()).Start();
+
             base.LoadContent();
 
-            // _InputService = _Mediator.RegisterService<IInputService, GamePadInputService>(new GamePadInputService(_UpdateService));
-            // TODO Do platform specific mediator registration here...
-
-            //_Logger.AddLogger(new DesktopTextLogger()).Start();
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
+            // TODO Start core game instance
         }
 
         /// <summary>
