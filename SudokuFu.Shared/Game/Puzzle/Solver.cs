@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using MonogameTemplate.Core.Events;
 using MonogameTemplate.Interfaces.Events;
-using MonogameTemplate.Interfaces.Timers;
 using SudokuFu.Desktop.Game;
 
 namespace SudokuFu.Shared.Game.Puzzle
@@ -15,12 +15,9 @@ namespace SudokuFu.Shared.Game.Puzzle
 
         private Board _Board;
 
-        private ITimedCallbackFactory _TimedCallbackFactory;
-
-        public Solver(IEventService eventService, ITimedCallbackFactory timedCallbackFactory)
+        public Solver(IEventService eventService)
         {
             _EventService = eventService;
-            _TimedCallbackFactory = timedCallbackFactory;
         }
 
         /// <summary>
@@ -58,12 +55,25 @@ namespace SudokuFu.Shared.Game.Puzzle
 
                     Thread.Sleep(150);
 
-                    // TODO _Printer.Print(_Grid, 100, $"{num} Added!");
+                    Event ev1 = new Event
+                    {
+                        Name = "PuzzleInfo",
+                        Data = $"SOLVER: Solving!"
+                    };
+                    _EventService.Trigger(ev1);
 
                     // recursively try the next empty space on the board
                     if (Solve(board, onComplete))
                     {
                         // The next empty space was filled move to that space
+                        sw.Stop();
+                        sw.Reset();
+                        Event ev3 = new Event
+                        {
+                            Name = "PuzzleInfo",
+                            Data = $"SOLVER: Puzzle Solved! {sw.Elapsed}!"
+                        };
+                        _EventService.Trigger(ev3);
                         return true;
                     }
 
@@ -72,7 +82,12 @@ namespace SudokuFu.Shared.Game.Puzzle
 
                     Thread.Sleep(150);
 
-                    //TODO _Printer.Print(_Grid, 100, $"{num} Removed!");
+                    Event ev2 = new Event
+                    {
+                        Name = "PuzzleInfo",
+                        Data = $"SOLVER: Backtracking!"
+                    };
+                    _EventService.Trigger(ev2);
 
                 }
 

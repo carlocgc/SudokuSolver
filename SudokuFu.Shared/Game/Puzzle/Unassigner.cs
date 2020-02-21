@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using MonogameTemplate.Core.Events;
 using MonogameTemplate.Interfaces.Events;
-using MonogameTemplate.Interfaces.Timers;
 using SudokuFu.Desktop.Game;
 
 namespace SudokuFu.Shared.Game.Puzzle
@@ -13,17 +13,15 @@ namespace SudokuFu.Shared.Game.Puzzle
         private readonly Board _Board;
         private readonly Int32 _MinSwaps;
         private readonly Int32 _MaxSwaps;
-        private ITimedCallbackFactory _TimedCallbackFactory;
-        private IEventService _EventService;
+        private readonly IEventService _EventService;
         private const Int32 SLEEP = 0;
 
-        public Unassigner(Board board, IEventService eventService, Int32 min, Int32 max, ITimedCallbackFactory timedCallbackFactory)
+        public Unassigner(Board board, IEventService eventService, Int32 min, Int32 max)
         {
             _Board = board;
             _EventService = eventService;
             _MinSwaps = min;
             _MaxSwaps = max;
-            _TimedCallbackFactory = timedCallbackFactory;
         }
 
         public void Run(Action onComplete)
@@ -56,9 +54,14 @@ namespace SudokuFu.Shared.Game.Puzzle
                         }
                     }
 
-                    Thread.Sleep(100);
+                    Thread.Sleep(150);
 
-                    // TODO _Printer.Print(_Grid, SLEEP, $"Quadrant: ({quadrantX}, {quadrantY}) had {amountReplaced} values unassigned");
+                    Event ev = new Event
+                    {
+                        Name = "PuzzleInfo",
+                        Data =  $"Quadrant: ({quadrantX}, {quadrantY}) had {amountReplaced} values unassigned"
+                    };
+                    _EventService.Trigger(ev);
                 }
             }
 

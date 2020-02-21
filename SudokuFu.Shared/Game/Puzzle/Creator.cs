@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using MonogameTemplate.Core.Events;
 using MonogameTemplate.Interfaces.Events;
 using MonogameTemplate.Interfaces.Timers;
 using SudokuFu.Desktop.Game;
@@ -12,19 +13,13 @@ namespace SudokuFu.Shared.Game.Puzzle
 {
     public class Creator
     {
-        private const Int32 SLEEP = 0;
-
         private readonly Random _Rand = new Random(Environment.TickCount);
-
         private readonly Int32[] _Shifts = {3, 3, 1, 3, 3, 1, 3, 3};
-
         private readonly Int32[] _Indices = {0, 3, 6};
-
         private readonly Board _Board;
-
         private readonly IEventService _EventService;
 
-        public Creator(Board board, IEventService eventService, ITimedCallbackFactory timedCallbackFactory)
+        public Creator(Board board, IEventService eventService)
         {
             _Board = board;
             _EventService = eventService;
@@ -68,9 +63,14 @@ namespace SudokuFu.Shared.Game.Puzzle
                 _Board.SetNumber(row, i,_Board.GetNumber(row - 1, index));
             }
 
-            Thread.Sleep(100);
+            Thread.Sleep(150);
 
-            // TODO _Printer.Print(_Grid, SLEEP, $"Row Created!");
+            Event ev = new Event
+            {
+                Name = "PuzzleInfo",
+                Data = "Board Seeded!"
+            };
+            _EventService.Trigger(ev);
         }
 
 
@@ -118,11 +118,16 @@ namespace SudokuFu.Shared.Game.Puzzle
                     }
                 }
 
-                String direction = rowShuffle ? "Quadrant Rows" : "Quadrant Columns";
+                Thread.Sleep(150);
 
-                Thread.Sleep(100);
+                String direction = rowShuffle ? "Quadrant Row" : "Quadrant Column";
 
-                // TODO _Printer.Print(_Grid, SLEEP, $"{direction} ({indexA}) swapped with ({indexB})");
+                Event ev = new Event
+                {
+                    Name = "PuzzleInfo",
+                    Data = $"{direction} ({indexA}) swapped with ({indexB})"
+                };
+                _EventService.Trigger(ev);
             }
         }
     }

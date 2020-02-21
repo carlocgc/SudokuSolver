@@ -11,16 +11,11 @@ namespace SudokuFu.Desktop.Game
     public class Tile : ITile, IRenderable, IContent, ITransform
     {
         private readonly Vector2 _Size;
-
         private readonly Vector2 _TextOffset;
-
         private Int32 _Number;
-
-        private SpriteFont _NumberSpriteFont;
-
-        private SpriteFont _CoordSpriteFont;
-
         private Vector2 _Coord;
+        private SpriteFont _NumberSpriteFont;
+        private SpriteFont _CoordSpriteFont;
 
         #region Implementation of ITransform
 
