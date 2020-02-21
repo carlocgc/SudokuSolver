@@ -9,14 +9,12 @@ namespace SudokuFu.Shared.Game
 {
     public class InfoText : IContent, IRenderable
     {
-        private readonly Vector2 _Position;
         private SpriteFont _InfoSpriteFont;
         private String _Text;
 
-        public InfoText(IEventService eventService, Vector2 position)
+        public InfoText(IEventService eventService)
         {
             eventService.Register("PuzzleInfo", OnPuzzleUpdated);
-            _Position = position;
         }
 
         private void OnPuzzleUpdated(IEvent obj)
@@ -28,7 +26,7 @@ namespace SudokuFu.Shared.Game
 
         public void LoadContent(IContentService contentService)
         {
-            _InfoSpriteFont = contentService.Load<SpriteFont>("Info");
+            _InfoSpriteFont = contentService.Load<SpriteFont>("Fonts/Info");
         }
 
         #endregion
@@ -43,7 +41,11 @@ namespace SudokuFu.Shared.Game
         /// <param name="spriteBatch"></param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(_InfoSpriteFont, _Text, _Position, Color.Red);
+            Vector2 size = _InfoSpriteFont.MeasureString(_Text);
+
+            Vector2 position = new Vector2(540 - (size.X / 2), 1600);
+
+            spriteBatch.DrawString(_InfoSpriteFont, _Text, position, Color.Red);
         }
 
         #endregion

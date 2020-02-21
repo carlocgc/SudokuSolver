@@ -68,7 +68,7 @@ namespace SudokuFu.Shared.Game.Puzzle
             Event ev = new Event
             {
                 Name = "PuzzleInfo",
-                Data = "Board Seeded!"
+                Data = "SEEDED"
             };
             _EventService.Trigger(ev);
         }
@@ -81,6 +81,13 @@ namespace SudokuFu.Shared.Game.Puzzle
         /// <param name="shuffles"> Shuffles to make </param>
         private void ShuffleRowsAndColumns(Board board, Int32 shuffles)
         {
+            Event ev = new Event
+            {
+                Name = "PuzzleInfo",
+                Data = $"SHUFFLING"
+            };
+            _EventService.Trigger(ev);
+
             List<Int32> unused = _Indices.ToList();
 
             for (Int32 i = 0; i < shuffles; i++)
@@ -120,14 +127,6 @@ namespace SudokuFu.Shared.Game.Puzzle
 
                 Thread.Sleep(150);
 
-                String direction = rowShuffle ? "Quadrant Row" : "Quadrant Column";
-
-                Event ev = new Event
-                {
-                    Name = "PuzzleInfo",
-                    Data = $"{direction} ({indexA}) swapped with ({indexB})"
-                };
-                _EventService.Trigger(ev);
             }
         }
     }

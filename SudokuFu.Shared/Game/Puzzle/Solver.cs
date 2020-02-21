@@ -39,6 +39,19 @@ namespace SudokuFu.Shared.Game.Puzzle
             {
                 // No empty spaces found, the puzzle is solved
 
+                sw.Stop();
+
+                Event ev3 = new Event
+                {
+                    Name = "PuzzleInfo",
+                    Data = $"SOLVED : {sw.Elapsed}"
+                };
+                _EventService.Trigger(ev3);
+
+                sw.Reset();
+
+                Thread.Sleep(1000);
+
                 onComplete?.Invoke();
 
                 return true;
@@ -58,22 +71,14 @@ namespace SudokuFu.Shared.Game.Puzzle
                     Event ev1 = new Event
                     {
                         Name = "PuzzleInfo",
-                        Data = $"SOLVER: Solving!"
+                        Data = $"SOLVING"
                     };
                     _EventService.Trigger(ev1);
 
                     // recursively try the next empty space on the board
                     if (Solve(board, onComplete))
                     {
-                        // The next empty space was filled move to that space
-                        sw.Stop();
-                        sw.Reset();
-                        Event ev3 = new Event
-                        {
-                            Name = "PuzzleInfo",
-                            Data = $"SOLVER: Puzzle Solved! {sw.Elapsed}!"
-                        };
-                        _EventService.Trigger(ev3);
+                        // Next space filled
                         return true;
                     }
 
@@ -85,7 +90,7 @@ namespace SudokuFu.Shared.Game.Puzzle
                     Event ev2 = new Event
                     {
                         Name = "PuzzleInfo",
-                        Data = $"SOLVER: Backtracking!"
+                        Data = $"BACKTRACKING"
                     };
                     _EventService.Trigger(ev2);
 

@@ -29,7 +29,7 @@ namespace SudokuFu.Shared.Game
             _Unassigner = new Unassigner(_Board, eventService, 3, 6);
             _Solver = new Solver(eventService);
 
-            _InfoText = new InfoText(eventService, new Vector2(1600, 10));
+            _InfoText = new InfoText(eventService);
             _InfoText.LoadContent(_Mediator.GetInstance<IContentService>());
             _Mediator.GetInstance<IRenderService>().Register(_InfoText);
 

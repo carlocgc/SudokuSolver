@@ -26,6 +26,13 @@ namespace SudokuFu.Shared.Game.Puzzle
 
         public void Run(Action onComplete)
         {
+            Event ev = new Event
+            {
+                Name = "PuzzleInfo",
+                Data =  $"CREATING SUDOKU"
+            };
+            _EventService.Trigger(ev);
+
             const Int32 QUADRANT_SIZE = 3;
 
             for (Int32 quadrantX = 0; quadrantX < 9; quadrantX += QUADRANT_SIZE)
@@ -55,13 +62,6 @@ namespace SudokuFu.Shared.Game.Puzzle
                     }
 
                     Thread.Sleep(150);
-
-                    Event ev = new Event
-                    {
-                        Name = "PuzzleInfo",
-                        Data =  $"Quadrant: ({quadrantX}, {quadrantY}) had {amountReplaced} values unassigned"
-                    };
-                    _EventService.Trigger(ev);
                 }
             }
 
@@ -79,7 +79,7 @@ namespace SudokuFu.Shared.Game.Puzzle
                 max = 8;
             }
 
-            List<Int32> indices = new List<Int32>() { 0,1,2,3,4,5,6,7,8 };
+            List<Int32> indices = new List<Int32> { 0,1,2,3,4,5,6,7,8 };
 
             Int32 amount = _Rand.Next(min, max);
 
