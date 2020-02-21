@@ -30,6 +30,7 @@ namespace SudokuFu.Desktop.Game
 
                     Tile tile = new Tile(new Vector2(xPos, yPos), tileSize, textOffset);
                     tile.SetNumber(0);
+                    tile.SetCoord(new Vector2(x, y));
                     tile.LoadContent(content);
                     renderService.Register(tile);
                     tile.Transform.Parent = _Transform;

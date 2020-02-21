@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonogameTemplate.Core.Helper;
 using MonogameTemplate.Core.Transform;
 using MonogameTemplate.Interfaces.Content;
 using MonogameTemplate.Interfaces.Role;
@@ -17,7 +16,11 @@ namespace SudokuFu.Desktop.Game
 
         private Int32 _Number;
 
-        private SpriteFont _SpriteFont;
+        private SpriteFont _NumberSpriteFont;
+
+        private SpriteFont _CoordSpriteFont;
+
+        private Vector2 _Coord;
 
         #region Implementation of ITransform
 
@@ -51,6 +54,11 @@ namespace SudokuFu.Desktop.Game
             _Number = num;
         }
 
+        public void SetCoord(Vector2 coord)
+        {
+            _Coord = coord;
+        }
+
         #endregion
 
         #region Implementation of IVisible
@@ -69,7 +77,8 @@ namespace SudokuFu.Desktop.Game
             spriteBatch.Draw(whiteRect, new Vector2(Transform.AbsolutePosition.X, Transform.AbsolutePosition.Y), null,
                 Color.White, 0f, Vector2.Zero, new Vector2(_Size.X, _Size.Y),
                 SpriteEffects.None, 0f);
-            spriteBatch.DrawString(_SpriteFont, _Number.ToString(), Transform.AbsolutePosition + _TextOffset, Color.Black);
+            spriteBatch.DrawString(_NumberSpriteFont, _Number.ToString(), Transform.AbsolutePosition + _TextOffset, Color.Black);
+            spriteBatch.DrawString(_CoordSpriteFont, $"({_Coord.X}, {_Coord.Y})", Transform.AbsolutePosition, Color.Black);
         }
 
         #endregion
@@ -78,11 +87,10 @@ namespace SudokuFu.Desktop.Game
 
         public void LoadContent(IContentService contentService)
         {
-            _SpriteFont = contentService.Load<SpriteFont>("Fonts/Number");
+            _NumberSpriteFont = contentService.Load<SpriteFont>("Fonts/Number");
+            _CoordSpriteFont = contentService.Load<SpriteFont>("Fonts/Coord");
         }
 
         #endregion
-
-
     }
 }

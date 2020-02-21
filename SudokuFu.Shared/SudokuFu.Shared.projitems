@@ -13,6 +13,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Game\Board.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\Puzzle\Creator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\Puzzle\Solver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\Puzzle\Unassigner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\Tile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\GameManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\States\CreateState.cs" />
