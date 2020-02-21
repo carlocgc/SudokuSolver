@@ -16,7 +16,7 @@ namespace SudokuFu.Shared.Game
         public GameManager(IMediator mediator)
         {
             _Mediator = mediator;
-            _Board = new Board(new Vector2(100, 150), new Vector2(10, 10), 10, _Mediator.GetInstance<IContentService>(), _Mediator.GetInstance<IRenderService>());
+            _Board = new Board(new Vector2(100, 150), new Vector2(12, 5), 5, _Mediator.GetInstance<IContentService>(), _Mediator.GetInstance<IRenderService>());
         }
 
         public void Start()
