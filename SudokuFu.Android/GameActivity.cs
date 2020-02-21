@@ -12,7 +12,7 @@ namespace SudokuFu.Android
         , Theme = "@style/Theme.Splash"
         , AlwaysRetainTaskState = true
         , LaunchMode = LaunchMode.SingleInstance
-        , ScreenOrientation = ScreenOrientation.SensorLandscape
+        , ScreenOrientation = ScreenOrientation.SensorPortrait
         , ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden | ConfigChanges.ScreenSize | ConfigChanges.ScreenLayout)]
     public class GameActivity : Microsoft.Xna.Framework.AndroidGameActivity
     {

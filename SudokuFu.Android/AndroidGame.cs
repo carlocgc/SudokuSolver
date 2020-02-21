@@ -12,6 +12,7 @@ namespace SudokuFu.Android
     /// This is the main type for your game.
     /// </summary>
     public class AndroidGame : GameCore
+
     {
         private GameManager _GameManager;
 
@@ -20,7 +21,8 @@ namespace SudokuFu.Android
             _GraphicsDeviceManager.IsFullScreen = true;
             _GraphicsDeviceManager.PreferredBackBufferWidth = 1080;
             _GraphicsDeviceManager.PreferredBackBufferHeight = 1920;
-            _GraphicsDeviceManager.SupportedOrientations = DisplayOrientation.Portrait | DisplayOrientation.PortraitDown;
+            _GraphicsDeviceManager.SupportedOrientations = DisplayOrientation.Portrait;
+            _VirtualScreenSize = new Vector2(1080, 1920);
         }
 
         protected override Assembly[] GetActiveAssemblies()

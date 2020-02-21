@@ -19,6 +19,7 @@ namespace SudokuFu.Desktop
         {
             _GraphicsDeviceManager.PreferredBackBufferWidth = 576;
             _GraphicsDeviceManager.PreferredBackBufferHeight = 1024;
+            _VirtualScreenSize = new Vector2(1080, 1920);
         }
 
         protected override Assembly[] GetActiveAssemblies()
