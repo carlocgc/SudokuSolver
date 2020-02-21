@@ -13,8 +13,8 @@ namespace SudokuFu.Desktop
     {
         public DesktopGame()
         {
-            _GraphicsDeviceManager.PreferredBackBufferWidth = 1280;
-            _GraphicsDeviceManager.PreferredBackBufferHeight = 720;
+            _GraphicsDeviceManager.PreferredBackBufferWidth = 576;
+            _GraphicsDeviceManager.PreferredBackBufferHeight = 1024;
         }
 
         protected override Assembly[] GetActiveAssemblies()

@@ -105,10 +105,11 @@
     </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <Content Include="Content\Scenes\BoardScene.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SupportingFiles\MonogameTemplate\MonogameTemplate.csproj">
       <Project>{973062b3-2669-4d96-a967-09440eac9d39}</Project>

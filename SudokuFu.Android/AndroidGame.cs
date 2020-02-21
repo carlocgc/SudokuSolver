@@ -14,9 +14,9 @@ namespace SudokuFu.Android
         public AndroidGame()
         {
             _GraphicsDeviceManager.IsFullScreen = true;
-            _GraphicsDeviceManager.PreferredBackBufferWidth = 1920;
-            _GraphicsDeviceManager.PreferredBackBufferHeight = 1080;
-            _GraphicsDeviceManager.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
+            _GraphicsDeviceManager.PreferredBackBufferWidth = 1080;
+            _GraphicsDeviceManager.PreferredBackBufferHeight = 1920;
+            _GraphicsDeviceManager.SupportedOrientations = DisplayOrientation.Portrait | DisplayOrientation.PortraitDown;
         }
 
         protected override Assembly[] GetActiveAssemblies()
