@@ -33,14 +33,18 @@ namespace SudokuFu.Shared.Game
             _Unassigner = new Unassigner(_Board, eventService, 3, 6, timedCallbackFactory);
             _Solver = new Solver(eventService, timedCallbackFactory);
 
+            RunPuzzle();
+        }
 
+        public void RunPuzzle()
+        {
             Task.Run(() =>
             {
                 _Creator.Create(() =>
                 {
                     _Unassigner.Run(() =>
                     {
-                        _Solver.Solve(_Board);
+                        _Solver.Solve(_Board, RunPuzzle);
                     });
                 });
             });

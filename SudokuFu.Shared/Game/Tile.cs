@@ -78,7 +78,7 @@ namespace SudokuFu.Desktop.Game
                 Color.White, 0f, Vector2.Zero, new Vector2(_Size.X, _Size.Y),
                 SpriteEffects.None, 0f);
             spriteBatch.DrawString(_NumberSpriteFont, _Number.ToString(), Transform.AbsolutePosition + _TextOffset, Color.Black);
-            spriteBatch.DrawString(_CoordSpriteFont, $"({_Coord.X}, {_Coord.Y})", Transform.AbsolutePosition, Color.Black);
+            spriteBatch.DrawString(_CoordSpriteFont, $"({_Coord.X}, {_Coord.Y})", Transform.AbsolutePosition + new Vector2(_TextOffset.X, 0), Color.Black);
         }
 
         #endregion

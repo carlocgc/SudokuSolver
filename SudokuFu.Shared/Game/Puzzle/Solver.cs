@@ -28,7 +28,7 @@ namespace SudokuFu.Shared.Game.Puzzle
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        public Boolean Solve(Board board)
+        public Boolean Solve(Board board, Action onComplete)
         {
             _Board = board;
 
@@ -42,6 +42,8 @@ namespace SudokuFu.Shared.Game.Puzzle
             {
                 // No empty spaces found, the puzzle is solved
 
+                onComplete?.Invoke();
+
                 return true;
             }
 
@@ -54,12 +56,12 @@ namespace SudokuFu.Shared.Game.Puzzle
                     // Yes number can be placed
                     _Board.SetNumber(row, col, num);
 
-                    Thread.Sleep(100);
+                    Thread.Sleep(150);
 
                     // TODO _Printer.Print(_Grid, 100, $"{num} Added!");
 
                     // recursively try the next empty space on the board
-                    if (Solve(board))
+                    if (Solve(board, onComplete))
                     {
                         // The next empty space was filled move to that space
                         return true;
@@ -68,7 +70,7 @@ namespace SudokuFu.Shared.Game.Puzzle
                     // If the next number cannot be assigned a value then un-assign the current number
                     _Board.SetNumber(row, col, 0);
 
-                    Thread.Sleep(100);
+                    Thread.Sleep(150);
 
                     //TODO _Printer.Print(_Grid, 100, $"{num} Removed!");
 
