@@ -16,9 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Game\Board\Tile.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Interfaces\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Game\" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\Board\TileData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITile.cs" />
   </ItemGroup>
 </Project>
