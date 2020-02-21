@@ -12,11 +12,15 @@
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\Board.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\Tile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\GameManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\States\CreateState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\States\SelectState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\States\SolveState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\Board\ITile.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Game\Board\Tile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Game\Board\TileData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITile.cs" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
 </Project>

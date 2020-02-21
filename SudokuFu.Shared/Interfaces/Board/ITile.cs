@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SudokuFu.Shared.Interfaces
+namespace SudokuFu.Desktop.Interfaces.Board
 {
     public interface ITile
     {
+        Int32 GetNumber();
+
         void SetNumber(Int32 num);
     }
 }

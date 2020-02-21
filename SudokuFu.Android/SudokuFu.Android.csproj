@@ -69,6 +69,7 @@
     <AndroidAsset Include="..\SudokuFu.Shared\Content\Json\BoardScene.json">
       <Link>Content\Json\BoardScene.json</Link>
     </AndroidAsset>
+    <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />

@@ -1,8 +1,10 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonogameTemplate.Core.Debugging.Loggers;
 using MonogameTemplate.Core.Logic;
+using SudokuFu.Shared.Game;
 
 namespace SudokuFu.Desktop
 {
@@ -11,6 +13,8 @@ namespace SudokuFu.Desktop
     /// </summary>
     public class DesktopGame : GameCore
     {
+        private GameManager _GameManager;
+
         public DesktopGame()
         {
             _GraphicsDeviceManager.PreferredBackBufferWidth = 576;
@@ -38,6 +42,8 @@ namespace SudokuFu.Desktop
             base.LoadContent();
 
             // TODO Start core game instance
+
+            _GameManager = new GameManager(_Mediator);
         }
 
         /// <summary>

@@ -3,7 +3,7 @@
 
 /outputDir:bin/$(Platform)
 /intermediateDir:obj/$(Platform)
-/platform:Windows
+/platform:Android
 /config:
 /profile:HiDef
 /compress:False
@@ -12,4 +12,11 @@
 
 
 #---------------------------------- Content ---------------------------------#
+
+#begin Fonts/Number.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Number.spritefont
 

@@ -1,8 +1,10 @@
+using System;
 using System.Reflection;
 using Microsoft.Xna.Framework;
 using MonogameTemplate.Core.Input;
 using MonogameTemplate.Core.Logic;
 using MonogameTemplate.Interfaces.Input;
+using SudokuFu.Shared.Game;
 
 namespace SudokuFu.Android
 {
@@ -11,6 +13,8 @@ namespace SudokuFu.Android
     /// </summary>
     public class AndroidGame : GameCore
     {
+        private GameManager _GameManager;
+
         public AndroidGame()
         {
             _GraphicsDeviceManager.IsFullScreen = true;
@@ -42,6 +46,8 @@ namespace SudokuFu.Android
             base.LoadContent();
 
             // TODO Start core game instance
+
+            _GameManager = new GameManager(_Mediator);
         }
     }
 }
