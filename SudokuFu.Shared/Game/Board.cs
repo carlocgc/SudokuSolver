@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using MonogameTemplate.Interfaces.Content;
 using MonogameTemplate.Interfaces.Graphics;
-using SudokuFu.Desktop.Interfaces.Board;
 
 namespace SudokuFu.Desktop.Game
 {
