@@ -74,7 +74,7 @@ namespace SudokuFu.Desktop.Game
             if (!Visible) return;
             Texture2D whiteRect = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             whiteRect.SetData(new[] { Color.White });
-            spriteBatch.Draw(whiteRect, new Vector2(Transform.AbsolutePosition.X, Transform.AbsolutePosition.Y), null,
+            spriteBatch.Draw(whiteRect, Transform.AbsolutePosition, null,
                 Color.White, 0f, Vector2.Zero, new Vector2(_Size.X, _Size.Y),
                 SpriteEffects.None, 0f);
             spriteBatch.DrawString(_NumberSpriteFont, _Number.ToString(), Transform.AbsolutePosition + _TextOffset, Color.Black);

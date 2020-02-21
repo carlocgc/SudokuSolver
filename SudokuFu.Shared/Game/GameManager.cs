@@ -34,16 +34,16 @@ namespace SudokuFu.Shared.Game
             _Solver = new Solver(eventService, timedCallbackFactory);
 
 
-            //Task.Run(() =>
-            //{
-            //    _Creator.Create(() =>
-            //    {
-            //        _Unassigner.Run(() =>
-            //        {
-            //            _Solver.Solve(_Board);
-            //        });
-            //    });
-            //});
+            Task.Run(() =>
+            {
+                _Creator.Create(() =>
+                {
+                    _Unassigner.Run(() =>
+                    {
+                        _Solver.Solve(_Board);
+                    });
+                });
+            });
         }
 
         public void Start()

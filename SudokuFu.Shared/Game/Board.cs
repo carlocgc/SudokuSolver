@@ -21,12 +21,13 @@ namespace SudokuFu.Desktop.Game
 
             _Grid = new Tile[9, 9];
 
-            for (Int32 y = 0; y < 9; y++)
+            for (Int32 x = 0; x < 9; x++)
             {
-                for (Int32 x = 0; x < 9; x++)
+                for (Int32 y = 0; y < 9; y++)
                 {
-                    Single xPos = (tileSize.X + spacer) * x;
-                    Single yPos = (tileSize.Y + spacer) * y;
+                    // Grid was drawing top to bottom, no idea why but had to switch the x and y here to get it to draw board in portrait :(
+                    Single xPos = (tileSize.X + spacer) * y;
+                    Single yPos = (tileSize.Y + spacer) * x;
 
                     Tile tile = new Tile(new Vector2(xPos, yPos), tileSize, textOffset);
                     tile.SetNumber(0);
