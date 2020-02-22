@@ -22,7 +22,7 @@ namespace SudokuFu.Shared.Game
             IContentService contentService = mediator.GetInstance<IContentService>();
             IRenderService renderService = mediator.GetInstance<IRenderService>();
 
-            _Board = new Board(new Vector2(100, 150), new Vector2(13, 5), 5, contentService, renderService, eventService);
+            _Board = new Board(new Vector2(100, 100), new Vector2(17, 3), 5, contentService, renderService, eventService);
             _Creator = new Creator(_Board, eventService);
             _Unassigner = new Unassigner(_Board, eventService, 3, 6);
             _Solver = new Solver(eventService);
