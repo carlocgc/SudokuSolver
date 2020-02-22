@@ -15,7 +15,6 @@ namespace SudokuFu.Shared.Game.Puzzle
         private readonly Int32 _MinSwaps;
         private readonly Int32 _MaxSwaps;
         private readonly IEventService _EventService;
-        private const Int32 SLEEP = 0;
 
         public Unassigner(Board board, IEventService eventService, Int32 min, Int32 max)
         {
@@ -58,11 +57,11 @@ namespace SudokuFu.Shared.Game.Puzzle
                     {
                         for (Int32 y = 0; y < QUADRANT_SIZE; y++)
                         {
-                            _Board.SetNumber(quadrantX + x, quadrantY + y, quadrantValues[valueIndex++], Color.Red);
+                            _Board.SetNumber(quadrantX + x, quadrantY + y, quadrantValues[valueIndex++], Color.Magenta);
                         }
                     }
 
-                    Thread.Sleep(150);
+                    Thread.Sleep(200);
                     _Board.SetColour(Color.White);
                 }
             }

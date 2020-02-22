@@ -59,5 +59,13 @@ namespace SudokuFu.Desktop.Game
                 tile.SetColour(colour);
             }
         }
+
+        public void SetAllNumbers(Int32 num)
+        {
+            foreach (Tile tile in _Grid)
+            {
+                tile.SetNumber(num);
+            }
+        }
     }
 }

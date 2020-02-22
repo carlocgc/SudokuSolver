@@ -14,9 +14,9 @@ namespace SudokuFu.Shared.Game.Puzzle
 
         private readonly IEventService _EventService;
 
-        private Board _Board;
+        private readonly Stopwatch _Stopwatch;
 
-        private Stopwatch _Stopwatch;
+        private Board _Board;
 
         public Solver(IEventService eventService)
         {
@@ -29,6 +29,7 @@ namespace SudokuFu.Shared.Game.Puzzle
         /// Solves any solvable sudoku board using backtracking
         /// </summary>
         /// <param name="board"></param>
+        /// <param name="onComplete"></param>
         /// <returns></returns>
         public Boolean Solve(Board board, Action onComplete)
         {
@@ -58,7 +59,9 @@ namespace SudokuFu.Shared.Game.Puzzle
 
                 _Stopwatch.Reset();
 
+                _Board.SetColour(Color.LawnGreen);
                 Thread.Sleep(1000);
+                _Board.SetColour(Color.White);
 
                 onComplete?.Invoke();
 
@@ -71,9 +74,6 @@ namespace SudokuFu.Shared.Game.Puzzle
                 // Can the number be place
                 if (IsValid(board, row, col, num))
                 {
-                    // Yes number can be placed
-                    _Board.SetNumber(row, col, num, Color.Green);
-
                     Event ev1 = new Event
                     {
                         Name = "PuzzleInfo",
@@ -81,7 +81,10 @@ namespace SudokuFu.Shared.Game.Puzzle
                     };
                     _EventService.Trigger(ev1);
 
-                    Thread.Sleep(150);
+                    // Yes number can be placed
+                    _Board.SetNumber(row, col, num, Color.LawnGreen);
+
+                    Thread.Sleep(200);
                     _Board.SetColour(Color.White);
 
                     // recursively try the next empty space on the board
@@ -102,7 +105,7 @@ namespace SudokuFu.Shared.Game.Puzzle
                     };
                     _EventService.Trigger(ev2);
 
-                    Thread.Sleep(150);
+                    Thread.Sleep(200);
                     _Board.SetColour(Color.White);
                 }
 

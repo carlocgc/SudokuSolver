@@ -26,15 +26,22 @@ namespace SudokuFu.Shared.Game.Puzzle
 
         public void Create(Action onComplete)
         {
-            Stopwatch sw = Stopwatch.StartNew();
+            SendEvent("CLEARED");
+            _Board.SetAllNumbers(0);
+            Thread.Sleep(500);
+            _Board.SetColour(Color.White);
+            SendEvent("SEEDING");
 
             List<Int32> unused = new List<Int32> {1,2,3,4,5,6,7,8,9};
 
             for (Int32 i = 0; i < 9; i++)
             {
                 Int32 index = _Rand.Next(0, unused.Count);
-                _Board.SetNumber(0, i, unused[index], Color.Red);
+                _Board.SetNumber(0, i, unused[index], Color.SkyBlue);
                 unused.Remove(_Board.GetNumber(0, i));
+
+                Thread.Sleep(200);
+                _Board.SetColour(Color.White);
             }
 
             for (Int32 i = 1; i < 9; i++)
@@ -55,21 +62,17 @@ namespace SudokuFu.Shared.Game.Puzzle
         /// <param name="shift"></param>
         private void ShiftAndFillRow(Board board, Int32 row, Int32 shift)
         {
+            SendEvent("SHIFTING");
+
             for (Int32 i = 0; i < 9; i++)
             {
                 Int32 index = (i + shift) % 9;
 
-                _Board.SetNumber(row, i, _Board.GetNumber(row - 1, index), Color.Red);
+                _Board.SetNumber(row, i, _Board.GetNumber(row - 1, index), Color.SkyBlue);
             }
 
-            Event ev = new Event
-            {
-                Name = "PuzzleInfo",
-                Data = "SEEDED"
-            };
-            _EventService.Trigger(ev);
 
-            Thread.Sleep(150);
+            Thread.Sleep(300);
             _Board.SetColour(Color.White);
         }
 
@@ -81,12 +84,7 @@ namespace SudokuFu.Shared.Game.Puzzle
         /// <param name="shuffles"> Shuffles to make </param>
         private void ShuffleRowsAndColumns(Board board, Int32 shuffles)
         {
-            Event ev = new Event
-            {
-                Name = "PuzzleInfo",
-                Data = $"SHUFFLING"
-            };
-            _EventService.Trigger(ev);
+            SendEvent("SHUFFLING");
 
             List<Int32> unused = _Indices.ToList();
 
@@ -113,21 +111,31 @@ namespace SudokuFu.Shared.Game.Puzzle
                         if (rowShuffle)
                         {
                             Int32 temp = _Board.GetNumber(indexA + j, x);
-                            _Board.SetNumber(indexA + j, x, _Board.GetNumber(indexB + j, x), Color.Red);
-                            _Board.SetNumber(indexB + j, x, temp, Color.Red);
+                            _Board.SetNumber(indexA + j, x, _Board.GetNumber(indexB + j, x), Color.MonoGameOrange);
+                            _Board.SetNumber(indexB + j, x, temp, Color.Yellow);
                         }
                         else
                         {
                             Int32 temp = _Board.GetNumber(x, indexA + j);
-                            _Board.SetNumber(x, indexA + j, _Board.GetNumber(x, indexB + j), Color.Red);
-                            _Board.SetNumber(x, indexB + j, temp, Color.Red);
+                            _Board.SetNumber(x, indexA + j, _Board.GetNumber(x, indexB + j), Color.MonoGameOrange);
+                            _Board.SetNumber(x, indexB + j, temp, Color.Yellow);
                         }
                     }
                 }
 
-                Thread.Sleep(150);
+                Thread.Sleep(200);
                 _Board.SetColour(Color.White);
             }
+        }
+
+        private void SendEvent(String message)
+        {
+            Event ev = new Event
+            {
+                Name = "PuzzleInfo",
+                Data = $"{message}"
+            };
+            _EventService.Trigger(ev);
         }
     }
 }
