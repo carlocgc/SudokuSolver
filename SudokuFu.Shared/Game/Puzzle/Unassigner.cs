@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Microsoft.Xna.Framework;
 using MonogameTemplate.Core.Events;
 using MonogameTemplate.Interfaces.Events;
 using SudokuFu.Desktop.Game;
@@ -57,11 +58,12 @@ namespace SudokuFu.Shared.Game.Puzzle
                     {
                         for (Int32 y = 0; y < QUADRANT_SIZE; y++)
                         {
-                            _Board.SetNumber(quadrantX + x, quadrantY + y, quadrantValues[valueIndex++]);
+                            _Board.SetNumber(quadrantX + x, quadrantY + y, quadrantValues[valueIndex++], Color.Red);
                         }
                     }
 
                     Thread.Sleep(150);
+                    _Board.SetColour(Color.White);
                 }
             }
 

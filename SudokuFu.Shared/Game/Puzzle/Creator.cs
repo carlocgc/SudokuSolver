@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
+using Microsoft.Xna.Framework;
 using MonogameTemplate.Core.Events;
 using MonogameTemplate.Interfaces.Events;
-using MonogameTemplate.Interfaces.Timers;
 using SudokuFu.Desktop.Game;
 
 namespace SudokuFu.Shared.Game.Puzzle
@@ -34,7 +33,7 @@ namespace SudokuFu.Shared.Game.Puzzle
             for (Int32 i = 0; i < 9; i++)
             {
                 Int32 index = _Rand.Next(0, unused.Count);
-                _Board.SetNumber(0, i, unused[index]);
+                _Board.SetNumber(0, i, unused[index], Color.Red);
                 unused.Remove(_Board.GetNumber(0, i));
             }
 
@@ -60,10 +59,8 @@ namespace SudokuFu.Shared.Game.Puzzle
             {
                 Int32 index = (i + shift) % 9;
 
-                _Board.SetNumber(row, i,_Board.GetNumber(row - 1, index));
+                _Board.SetNumber(row, i, _Board.GetNumber(row - 1, index), Color.Red);
             }
-
-            Thread.Sleep(150);
 
             Event ev = new Event
             {
@@ -71,6 +68,9 @@ namespace SudokuFu.Shared.Game.Puzzle
                 Data = "SEEDED"
             };
             _EventService.Trigger(ev);
+
+            Thread.Sleep(150);
+            _Board.SetColour(Color.White);
         }
 
 
@@ -113,20 +113,20 @@ namespace SudokuFu.Shared.Game.Puzzle
                         if (rowShuffle)
                         {
                             Int32 temp = _Board.GetNumber(indexA + j, x);
-                            _Board.SetNumber(indexA + j, x,_Board.GetNumber(indexB + j, x));
-                            _Board.SetNumber(indexB + j, x, temp);
+                            _Board.SetNumber(indexA + j, x, _Board.GetNumber(indexB + j, x), Color.Red);
+                            _Board.SetNumber(indexB + j, x, temp, Color.Red);
                         }
                         else
                         {
                             Int32 temp = _Board.GetNumber(x, indexA + j);
-                            _Board.SetNumber(x, indexA + j, _Board.GetNumber(x, indexB + j));
-                            _Board.SetNumber(x, indexB + j, temp);
+                            _Board.SetNumber(x, indexA + j, _Board.GetNumber(x, indexB + j), Color.Red);
+                            _Board.SetNumber(x, indexB + j, temp, Color.Red);
                         }
                     }
                 }
 
                 Thread.Sleep(150);
-
+                _Board.SetColour(Color.White);
             }
         }
     }

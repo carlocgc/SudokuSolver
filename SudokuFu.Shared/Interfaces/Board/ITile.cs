@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace SudokuFu.Desktop.Interfaces.Board
 {
@@ -7,5 +8,7 @@ namespace SudokuFu.Desktop.Interfaces.Board
         Int32 GetNumber();
 
         void SetNumber(Int32 num);
+
+        void SetColour(Color color);
     }
 }

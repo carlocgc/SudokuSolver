@@ -16,6 +16,7 @@ namespace SudokuFu.Desktop.Game
         private Vector2 _Coord;
         private SpriteFont _NumberSpriteFont;
         private SpriteFont _CoordSpriteFont;
+        private Color _Colour;
 
         #region Implementation of ITransform
 
@@ -49,6 +50,11 @@ namespace SudokuFu.Desktop.Game
             _Number = num;
         }
 
+        public void SetColour(Color color)
+        {
+            _Colour = color;
+        }
+
         public void SetCoord(Vector2 coord)
         {
             _Coord = coord;
@@ -70,7 +76,7 @@ namespace SudokuFu.Desktop.Game
             Texture2D whiteRect = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             whiteRect.SetData(new[] { Color.White });
             spriteBatch.Draw(whiteRect, Transform.AbsolutePosition, null,
-                Color.White, 0f, Vector2.Zero, new Vector2(_Size.X, _Size.Y),
+                _Colour, 0f, Vector2.Zero, new Vector2(_Size.X, _Size.Y),
                 SpriteEffects.None, 0f);
             spriteBatch.DrawString(_NumberSpriteFont, _Number.ToString(), Transform.AbsolutePosition + _TextOffset, Color.Black);
             spriteBatch.DrawString(_CoordSpriteFont, $"({_Coord.X}, {_Coord.Y})", Transform.AbsolutePosition + new Vector2(_TextOffset.X, 0), Color.Black);

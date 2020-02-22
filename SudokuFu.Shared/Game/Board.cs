@@ -46,9 +46,18 @@ namespace SudokuFu.Desktop.Game
             return _Grid[x, y].GetNumber();
         }
 
-        public void SetNumber(Int32 x, Int32 y, Int32 num)
+        public void SetNumber(Int32 x, Int32 y, Int32 num, Color colour)
         {
             _Grid[x, y].SetNumber(num);
+            _Grid[x, y].SetColour(colour);
+        }
+
+        public void SetColour(Color colour)
+        {
+            foreach (Tile tile in _Grid)
+            {
+                tile.SetColour(colour);
+            }
         }
     }
 }

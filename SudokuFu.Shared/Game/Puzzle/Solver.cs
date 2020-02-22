@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using Microsoft.Xna.Framework;
 using MonogameTemplate.Core.Events;
 using MonogameTemplate.Interfaces.Events;
 using SudokuFu.Desktop.Game;
@@ -15,9 +16,13 @@ namespace SudokuFu.Shared.Game.Puzzle
 
         private Board _Board;
 
+        private Stopwatch _Stopwatch;
+
         public Solver(IEventService eventService)
         {
             _EventService = eventService;
+
+            _Stopwatch = new Stopwatch();
         }
 
         /// <summary>
@@ -29,7 +34,10 @@ namespace SudokuFu.Shared.Game.Puzzle
         {
             _Board = board;
 
-            Stopwatch sw = Stopwatch.StartNew();
+            if (!_Stopwatch.IsRunning)
+            {
+                _Stopwatch.Start();
+            }
 
             Int32 row = 0;
             Int32 col = 0;
@@ -39,16 +47,16 @@ namespace SudokuFu.Shared.Game.Puzzle
             {
                 // No empty spaces found, the puzzle is solved
 
-                sw.Stop();
+                _Stopwatch.Stop();
 
                 Event ev3 = new Event
                 {
                     Name = "PuzzleInfo",
-                    Data = $"SOLVED : {sw.Elapsed}"
+                    Data = $"SOLVED : {_Stopwatch.Elapsed:c}"
                 };
                 _EventService.Trigger(ev3);
 
-                sw.Reset();
+                _Stopwatch.Reset();
 
                 Thread.Sleep(1000);
 
@@ -64,9 +72,7 @@ namespace SudokuFu.Shared.Game.Puzzle
                 if (IsValid(board, row, col, num))
                 {
                     // Yes number can be placed
-                    _Board.SetNumber(row, col, num);
-
-                    Thread.Sleep(150);
+                    _Board.SetNumber(row, col, num, Color.Green);
 
                     Event ev1 = new Event
                     {
@@ -75,17 +81,19 @@ namespace SudokuFu.Shared.Game.Puzzle
                     };
                     _EventService.Trigger(ev1);
 
+                    Thread.Sleep(150);
+                    _Board.SetColour(Color.White);
+
                     // recursively try the next empty space on the board
                     if (Solve(board, onComplete))
                     {
                         // Next space filled
+
                         return true;
                     }
 
                     // If the next number cannot be assigned a value then un-assign the current number
-                    _Board.SetNumber(row, col, 0);
-
-                    Thread.Sleep(150);
+                    _Board.SetNumber(row, col, 0, Color.Red);
 
                     Event ev2 = new Event
                     {
@@ -94,6 +102,8 @@ namespace SudokuFu.Shared.Game.Puzzle
                     };
                     _EventService.Trigger(ev2);
 
+                    Thread.Sleep(150);
+                    _Board.SetColour(Color.White);
                 }
 
                 // No number cannot be placed
