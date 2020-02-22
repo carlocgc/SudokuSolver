@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework;
 using MonogameTemplate.Core.Transform;
 using MonogameTemplate.Interfaces.Content;
+using MonogameTemplate.Interfaces.Events;
 using MonogameTemplate.Interfaces.Graphics;
+using SudokuFu.Shared.Game;
 
 namespace SudokuFu.Desktop.Game
 {
@@ -11,13 +13,16 @@ namespace SudokuFu.Desktop.Game
 
         private Transform2D _Transform;
 
+        private InfoText _InfoText;
+
         private readonly Tile[,] _Grid;
 
-        public Board(Vector2 tileSize, Vector2 textOffset, Single spacer, IContentService content, IRenderService renderService)
+        public Board(Vector2 tileSize, Vector2 textOffset, Single spacer, IContentService content, IRenderService renderService, IEventService eventService)
         {
-            _Transform = new Transform2D();
-
-            _Transform.Position = new Vector2(70, 50);
+            _Transform = new Transform2D
+            {
+                Position = new Vector2(70, 50)
+            };
 
             _Grid = new Tile[9, 9];
 
@@ -39,6 +44,12 @@ namespace SudokuFu.Desktop.Game
                     _Grid[x, y] = tile;
                 }
             }
+
+            const Single TEXT_Y_BUFFER = 50;
+            Vector2 infoOffset = new Vector2(540, _Grid[8, 0].Transform.Position.Y + tileSize.Y + TEXT_Y_BUFFER);
+            _InfoText = new InfoText(eventService, infoOffset);
+            _InfoText.LoadContent(content);
+            renderService.Register(_InfoText);
         }
 
         public Int32 GetNumber(Int32 x, Int32 y)

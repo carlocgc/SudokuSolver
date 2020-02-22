@@ -73,12 +73,19 @@ namespace SudokuFu.Desktop.Game
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (!Visible) return;
+
             Texture2D whiteRect = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             whiteRect.SetData(new[] { Color.White });
+
             spriteBatch.Draw(whiteRect, Transform.AbsolutePosition, null,
                 _Colour, 0f, Vector2.Zero, new Vector2(_Size.X, _Size.Y),
                 SpriteEffects.None, 0f);
-            spriteBatch.DrawString(_NumberSpriteFont, _Number.ToString(), Transform.AbsolutePosition + _TextOffset, Color.Black);
+
+            if (_Number != 0)
+            {
+                spriteBatch.DrawString(_NumberSpriteFont, _Number.ToString(), Transform.AbsolutePosition + _TextOffset, Color.Black);
+            }
+
             spriteBatch.DrawString(_CoordSpriteFont, $"({_Coord.X}, {_Coord.Y})", Transform.AbsolutePosition + new Vector2(_TextOffset.X, 0), Color.Black);
         }
 
