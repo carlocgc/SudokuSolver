@@ -25,10 +25,13 @@ namespace SudokuFu.Shared.Game.Puzzle
 
         public void Create(Action onComplete)
         {
-            SendEvent("CLEARED");
-            _Board.SetAllNumbers(0);
-            Thread.Sleep(500);
             _Board.SetColour(Color.White);
+            _Board.SetAllNumbers(0);
+
+            SendEvent("CLEARED");
+
+            Thread.Sleep(500);
+
             SendEvent("SEEDING");
 
             List<Int32> unused = new List<Int32> {1,2,3,4,5,6,7,8,9};
