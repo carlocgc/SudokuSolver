@@ -37,7 +37,7 @@ namespace SudokuFu.Shared.Game.Puzzle
 
             if (!_Stopwatch.IsRunning)
             {
-                _Stopwatch.Start();
+                _Stopwatch.Restart();
             }
 
             Int32 row = 0;
@@ -50,17 +50,12 @@ namespace SudokuFu.Shared.Game.Puzzle
 
                 _Stopwatch.Stop();
 
-                Event ev3 = new Event
-                {
-                    Name = "PuzzleInfo",
-                    Data = $"SOLVED : {_Stopwatch.Elapsed:c}"
-                };
-                _EventService.Trigger(ev3);
-
-                _Stopwatch.Reset();
+                SendEvent($"SOLVED : {_Stopwatch.Elapsed:c}");
 
                 _Board.SetColour(Color.LawnGreen);
+
                 Thread.Sleep(1000);
+
                 _Board.SetColour(Color.White);
 
                 onComplete?.Invoke();
@@ -74,12 +69,7 @@ namespace SudokuFu.Shared.Game.Puzzle
                 // Can the number be place
                 if (IsValid(board, row, col, num))
                 {
-                    Event ev1 = new Event
-                    {
-                        Name = "PuzzleInfo",
-                        Data = $"SOLVING"
-                    };
-                    _EventService.Trigger(ev1);
+                    SendEvent("SOLVING");
 
                     // Yes number can be placed
                     _Board.SetNumber(row, col, num, Color.LawnGreen);
@@ -98,12 +88,7 @@ namespace SudokuFu.Shared.Game.Puzzle
                     // If the next number cannot be assigned a value then un-assign the current number
                     _Board.SetNumber(row, col, 0, Color.Red);
 
-                    Event ev2 = new Event
-                    {
-                        Name = "PuzzleInfo",
-                        Data = $"BACKTRACKING"
-                    };
-                    _EventService.Trigger(ev2);
+                    SendEvent("BACKTRACKING");
 
                     Thread.Sleep(200);
                     _Board.SetColour(Color.White);
@@ -191,6 +176,17 @@ namespace SudokuFu.Shared.Game.Puzzle
             }
 
             return true;
+        }
+
+
+        private void SendEvent(String message)
+        {
+            Event ev = new Event
+            {
+                Name = "PuzzleInfo",
+                Data =  $"{message}"
+            };
+            _EventService.Trigger(ev);
         }
     }
 }
