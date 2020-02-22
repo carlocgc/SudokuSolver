@@ -17,11 +17,11 @@ namespace SudokuFu.Desktop.Game
 
         private readonly Tile[,] _Grid;
 
-        public Board(Vector2 tileSize, Vector2 textOffset, Single spacer, IContentService content, IRenderService renderService, IEventService eventService)
+        public Board(Vector2 boardPos, Vector2 tileSize, Vector2 textOffset, Single spacer, IContentService content, IRenderService renderService, IEventService eventService)
         {
             _Transform = new Transform2D
             {
-                Position = new Vector2(70, 50)
+                Position = boardPos
             };
 
             _Grid = new Tile[9, 9];

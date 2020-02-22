@@ -50,7 +50,10 @@ namespace SudokuFu.Shared.Game.Puzzle
 
                 _Stopwatch.Stop();
 
-                SendEvent($"SOLVED : {_Stopwatch.Elapsed:c}");
+                String time = $"{_Stopwatch.Elapsed:hh\\:mm\\:ss}";
+
+
+                SendEvent($"SOLVED : {time}");
 
                 _Board.SetColour(Color.LawnGreen);
 
